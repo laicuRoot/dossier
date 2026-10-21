@@ -25,18 +25,5 @@ export async function register() {
     // The job agent's daily run, while it's on (E16-4).
     const { startAgentSchedule } = await import("@/lib/agent/schedule");
     startAgentSchedule();
-
-    // DOSSIER_TELEMETRY, when set, is the usage ping's answer on record (#172).
-    // Then the log says what the ping sends while it's on, or how to answer
-    // while nobody has.
-    const { recordEnvChoice, usagePingNotice } = await import("@/lib/usage-ping");
-    const { loadSettings } = await import("@/lib/settings-data");
-    try {
-      await recordEnvChoice();
-      const notice = usagePingNotice(await loadSettings());
-      if (notice) console.log(notice);
-    } catch (error) {
-      logServerError("usage ping", error);
-    }
   }
 }

@@ -72,7 +72,7 @@ const json = (value: unknown) => (value === null || value === undefined ? Prisma
  * Replaces all user data with the export's, in one transaction. Each saved
  * key (the AI provider's, the job sources') stays as it is unless the file
  * carries one, which is then encrypted with this server's secret. The
- * install's own settings (the usage ping's) stay as they are.
+ * install's own settings (INSTALL_SETTINGS) stay as they are.
  */
 export async function importExport(db: PrismaClient, data: DossierExport): Promise<void> {
   const { profile, themes, settings, applications, postings, searches, agentCandidates, apiKey, jobSourceKeys } = data;
